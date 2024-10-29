@@ -1,10 +1,11 @@
 import  { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from '../Utilities/AuthContext';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 function Login() {
-
+    const { login } = useAuth();
     const navigate = useNavigate();
     const [userName, setUserName] = useState("user1@example.com");
     const [password, setPassword] = useState("String1!");
@@ -16,18 +17,17 @@ function Login() {
         const loginPayload = {
             username: userName,
             password: password,
+           
         };
 
         axios
             .post("https://localhost:7131/api/Auth/Login", loginPayload)
             .then((response) => {
                 const token = response.data.jwtToken;
-
+                
                 localStorage.setItem("token", token);
 
-                if (token) {
-                    axios.defaults.headers.common["Authorization"] =" Bearer ${ token }";
-                }
+                login(token);
 
                 navigate("/");
             })
@@ -84,9 +84,13 @@ function Login() {
                                 className="form-check-input"
                                 id="exampleCheck1"
                             />
-                            <label className="form-check-label" htmlFor="exampleCheck1">Check me out</label>
+                            <label className="form-check-label" htmlFor="exampleCheck1">Remember Me</label>
                         </div>
-                        <button type="submit" className="btn btn-primary btn-sm">Submit</button>
+                        <div style={{ textAlign: 'center', marginTop: '16px' }}>
+                            <button type="submit" className="btn btn-primary">
+                                Login
+                            </button>
+                        </div>
                     </form>
                 </div>
             </div>

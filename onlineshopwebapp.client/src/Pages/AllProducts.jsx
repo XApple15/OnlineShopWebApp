@@ -1,13 +1,21 @@
-import  { useState, useEffect } from "react";
+
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { useState, useEffect, useContext } from 'react'
+import { CartContext } from '../context/cart.jsx'
+import Cart from '../Components/Cart.jsx'
 
 //import truncateString from "../Utilities/TruncateString"; not using anymore
 
 function AllProducts() {
     const navigate = useNavigate();
     const [products, setProducts] = useState([]);
+    const [showModal, setshowModal] = useState(false);
+    const { cartItems, addToCart } = useContext(CartContext)
 
+    const toggle = () => {
+        setshowModal(!showModal);
+    };
 
     useEffect(() => {
             axios
@@ -25,16 +33,21 @@ function AllProducts() {
 
     return (
         <div className="container mt-4">
+            {!showModal && <button className='px-4 py-2 bg-gray-800 text-white text-xs font-bold uppercase rounded hover:bg-gray-700 focus:outline-none focus:bg-gray-700'
+                onClick={toggle}
+            >Cart ({cartItems.length})</button>}
             <div className="row row-cols-1 row-cols-md-3 g-4">
                 {products.map(product => (
                     
-                    <div className="col" onClick={() => handleClick(product)}>
+                    <div  key={product.id} className="col" onClick={() => handleClick(product)}>
                         <div className="card h-100">
                             <img src={product.productImageURL} className="card-img-top" width="200" height="300" />
                             <div key={product.id} className="card-body">
                                 <h5 className="card-title">{product.name}</h5>
                             </div>
-                        
+                            <button className='px-4 py-2 bg-gray-800 text-white text-xs font-bold uppercase rounded hover:bg-gray-700 focus:outline-none focus:bg-gray-700'
+                                onClick={() => {addToCart(product)}}>
+                                Add to cart</button>
                             <div className="card-footer">
                                 <small className="text-body-secondary">{product.price} Lei</small>
                             </div>
@@ -42,6 +55,7 @@ function AllProducts() {
                     </div>
                 ))}
             </div>
+            <Cart showModal={showModal} toggle={toggle} />
         </div>
     );
 }
