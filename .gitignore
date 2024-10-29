@@ -361,3 +361,5 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+/onlineshopwebapp.client/src/context/cart.jsx
+/onlineshopwebapp.client/src/Components/Cart.jsx
