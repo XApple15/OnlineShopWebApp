@@ -28,7 +28,6 @@ function ProductDetails() {
     if (!product) {
         return <div>Product not found</div>; 
     }
-
    
     return (
         <div className="container mt-5">

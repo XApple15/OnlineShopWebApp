@@ -1,4 +1,4 @@
-// src/utils/jwtUtils.js
+
 
 export const decodeJwt = (token) => {
     try {
@@ -10,7 +10,7 @@ export const decodeJwt = (token) => {
         return JSON.parse(jsonPayload);
     } catch (error) {
         console.error('Failed to decode JWT:', error);
-        return null; // Return null or handle the error as needed
+        return null; 
     }
 };
 
@@ -18,6 +18,6 @@ export const isTokenExpired = (token) => {
     const decodedToken = decodeJwt(token);
     if (!decodedToken || !decodedToken.exp) return true;
 
-    const currentTime = Date.now() / 1000; // Convert to seconds
-    return decodedToken.exp < currentTime; // Token is expired if the current time exceeds the expiry
+    const currentTime = Date.now() / 1000; 
+    return decodedToken.exp < currentTime; 
 };

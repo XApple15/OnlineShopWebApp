@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
-import axios from 'axios'; // Ensure axios is imported
+import axios from 'axios';
 import { decodeJwt, isTokenExpired } from '../Utilities/RetrieveDataFromJWT';
 
 const AuthContext = createContext();
@@ -18,7 +18,6 @@ export const AuthProvider = ({ children }) => {
         setLoading(false);
     }, []);
 
-    // Remove the duplicate `login` function
     const login = (token) => {
         localStorage.setItem('token', token);
         const decoded = decodeJwt(token);

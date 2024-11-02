@@ -5,5 +5,4 @@ const truncateString = (str, num) => {
     return str;
 };
 
-
 export default truncateString;

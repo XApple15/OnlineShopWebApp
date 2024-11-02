@@ -33,9 +33,6 @@ function AllProducts() {
 
     return (
         <div className="container mt-4">
-            {!showModal && <button className='px-4 py-2 bg-gray-800 text-white text-xs font-bold uppercase rounded hover:bg-gray-700 focus:outline-none focus:bg-gray-700'
-                onClick={toggle}
-            >Cart ({cartItems.length})</button>}
             <div className="row row-cols-1 row-cols-md-3 g-4">
                 {products.map(product => (
                     
@@ -55,7 +52,6 @@ function AllProducts() {
                     </div>
                 ))}
             </div>
-            <Cart showModal={showModal} toggle={toggle} />
         </div>
     );
 }

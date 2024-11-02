@@ -11,21 +11,20 @@ import MyAccount from "./Pages/MyAccount";
 import { AuthProvider } from './Utilities/AuthContext';
 
 function App() {
-  
     return (
         <AuthProvider>
-        <Router>
-            <NavBar  />
-            <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/about" element={<About />} />
-                <Route path="/allproducts" element={<AllProducts />} />
-                <Route path="/login" element={<Login />} />
-                <Route path="/register" element={<Register />} />
-                <Route path="/products/:id" element={<ProductDetails />} />
-                <Route path="/account" element={<MyAccount />} />"
-                <Route path="*" element={<NotFound />} />
-            </Routes>
+            <Router>
+                <NavBar  />
+                <Routes>
+                    <Route path="/" element={<Home />} />
+                    <Route path="/about" element={<About />} />
+                    <Route path="/allproducts" element={<AllProducts />} />
+                    <Route path="/login" element={<Login />} />
+                    <Route path="/register" element={<Register />} />
+                    <Route path="/products/:id" element={<ProductDetails />} />
+                    <Route path="/account" element={<MyAccount />} />"
+                    <Route path="*" element={<NotFound />} />
+                </Routes>
             </Router>
         </AuthProvider>
     );

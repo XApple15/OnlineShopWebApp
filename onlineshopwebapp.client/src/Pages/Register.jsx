@@ -23,8 +23,6 @@ function Register() {
             password: password,
             roles:["Reader"]
         };
-
-
 		axios
 			.post("https://localhost:7131/api/Auth/Register", registerPayload)
 			.then((response) => {
@@ -36,8 +34,6 @@ function Register() {
                 setSuccess("");
 				setError("Registration failed.");
 			});
-			
-
 	}
     function handleEmailChange(event) {
         setEmail(event.target.value);
@@ -79,9 +75,6 @@ function Register() {
                                     value={email}
                                     onChange={handleEmailChange}
                                 />
-                                <small id="emailHelp" className="form-text text-muted">
-                                    We'll never share your email with anyone else.
-                                </small>
                             </div>
                             <div className="form-group">
                                 <label htmlFor="password">Password</label>
@@ -105,14 +98,6 @@ function Register() {
                                     onChange={handlePasswordConfirmChange}
                                 />
                             </div>
-                            <div className="form-group form-check">
-                                <input
-                                    type="checkbox"
-                                    className="form-check-input"
-                                    id="termsCheck"
-                                />
-                                <label className="form-check-label" htmlFor="termsCheck">I agree to the terms and conditions</label>
-                            </div>
                             <div style={{ textAlign: 'center', marginTop: '16px' }}>
                                 <button type="submit" className="btn btn-primary">
                                     Register
@@ -123,7 +108,6 @@ function Register() {
                 </div>
             }
         </div>
-
 	);
 }
 

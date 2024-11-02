@@ -1,5 +1,3 @@
-
-
 function NotFound() {
     return (
         <div className="container mt-4">

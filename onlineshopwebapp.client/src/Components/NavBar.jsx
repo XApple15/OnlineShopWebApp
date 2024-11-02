@@ -1,19 +1,18 @@
+import 'bootstrap/dist/css/bootstrap.min.css';
 import { NavLink, useNavigate } from "react-router-dom";
 import React, { useEffect, useState, useContext } from "react";
 import axios from "axios";
 import { useAuth } from '../Utilities/AuthContext';
 import Cart from '../Components/Cart.jsx';
 import { CartContext } from '../context/cart.jsx'
-import 'bootstrap/dist/css/bootstrap.min.css';
 import Login from "../Pages/Login";
 
 function NavBar() {
     const [showModal, setshowModal] = useState(false);
-    const { cartItems, addToCart } = useContext(CartContext)
+    const { cartItems, addToCart } = useContext(CartContext);
     
     const { user, logout } = useAuth();
     const navigate = useNavigate();
-
 
     const toggle = () => {
         setshowModal(!showModal);
@@ -30,6 +29,7 @@ function NavBar() {
 
     return (
         <div>
+           
             <nav className="navbar navbar-expand-lg bg-body-tertiary">
                 <div className="container-fluid">
                     <NavLink className="navbar-brand" to="/">OnlineShop</NavLink>
@@ -48,8 +48,8 @@ function NavBar() {
                                 <NavLink className="nav-link" to="/about">About</NavLink>
                             </li>
                         </ul>
-                        {!showModal && <button className='px-4 py-2 bg-gray-800 text-white text-xs font-bold uppercase rounded hover:bg-gray-700 focus:outline-none focus:bg-gray-700'
-                            onClick={toggle}
+                        {!showModal && <button className="show-modal-button"
+                            style={{ marginRight: "10px" }} onClick={toggle}
                         >Cart ({cartItems.length})</button>}
                         {user ? (
                             <div>
@@ -64,7 +64,8 @@ function NavBar() {
                         )}
                     </div>
                 </div>
-            </nav>
+            </nav>  
+            <Cart showModal={showModal} toggle={toggle} />
         </div>
     );
 }

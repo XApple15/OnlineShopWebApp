@@ -1,8 +1,9 @@
-import  { useState } from "react";
+import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from "axios";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from '../Utilities/AuthContext';
-import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 function Login() {
     const { login } = useAuth();
@@ -19,16 +20,12 @@ function Login() {
             password: password,
            
         };
-
         axios
             .post("https://localhost:7131/api/Auth/Login", loginPayload)
             .then((response) => {
                 const token = response.data.jwtToken;
-                
                 localStorage.setItem("token", token);
-
                 login(token);
-
                 navigate("/");
             })
             .catch((err) => {
@@ -36,7 +33,6 @@ function Login() {
                 setError("Login failed. Please check your credentials.");
             });
     }
-
     function handleUserNameChange(event) {
         setUserName(event.target.value);
     }
@@ -63,9 +59,6 @@ function Login() {
                                 value={userName}
                                 onChange={handleUserNameChange}
                             />
-                            <small id="emailHelp" className="form-text text-muted">
-                                Help
-                            </small>
                         </div>
                         <div className="form-group">
                             <label htmlFor="exampleInputPassword1">Password</label>
