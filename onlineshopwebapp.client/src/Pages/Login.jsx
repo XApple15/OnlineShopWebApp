@@ -2,7 +2,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useAuth } from '../Utilities/AuthContext';
+import { useAuth } from '../Context/AuthContext';
 
 
 function Login() {
@@ -11,27 +11,30 @@ function Login() {
     const [userName, setUserName] = useState("user1@example.com");
     const [password, setPassword] = useState("String1!");
     const [error, setError] = useState("");
+    const auth = useAuth();
 
-    function handleSubmit(event) {
+    async function handleSubmit(event) {
         event.preventDefault();
 
         const loginPayload = {
             username: userName,
             password: password,
-           
         };
-        axios
-            .post("https://localhost:7131/api/Auth/Login", loginPayload)
-            .then((response) => {
-                const token = response.data.jwtToken;
-                localStorage.setItem("token", token);
-                login(token);
-                navigate("/");
-            })
-            .catch((err) => {
-                console.error(err);
-                setError("Login failed. Please check your credentials.");
-            });
+
+        if (loginPayload.username && loginPayload.password) { 
+            try {
+                const result = await auth.loginAction(loginPayload);  
+                if (result === 200) {
+                    navigate("/account");
+                } else {
+                    setError("Please check your credentials");
+                }
+            } catch (error) {
+                setError("An error occurred. Please try again.");
+            }
+        } else {
+            setError("Please enter a username and password.");
+        }
     }
     function handleUserNameChange(event) {
         setUserName(event.target.value);

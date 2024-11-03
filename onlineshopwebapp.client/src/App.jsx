@@ -8,12 +8,13 @@ import ProductDetails from "./Pages/ProductDetails";
 import NotFound from "./Pages/NotFound";
 import Register from "./Pages/Register";
 import MyAccount from "./Pages/MyAccount";
-import { AuthProvider } from './Utilities/AuthContext';
+import { AuthProvider } from './Context/AuthContext';
+import PrivateRoute from "./Context/PrivateRoute";
 
 function App() {
     return (
-        <AuthProvider>
-            <Router>
+        <Router>
+            <AuthProvider>      
                 <NavBar  />
                 <Routes>
                     <Route path="/" element={<Home />} />
@@ -22,11 +23,13 @@ function App() {
                     <Route path="/login" element={<Login />} />
                     <Route path="/register" element={<Register />} />
                     <Route path="/products/:id" element={<ProductDetails />} />
-                    <Route path="/account" element={<MyAccount />} />"
+                    <Route element={<PrivateRoute />}>
+                        <Route path="/account" element={<MyAccount />} />"
+                    </Route>
                     <Route path="*" element={<NotFound />} />
                 </Routes>
-            </Router>
-        </AuthProvider>
+            </AuthProvider>
+        </Router>    
     );
 }
 

@@ -2,15 +2,14 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { NavLink, useNavigate } from "react-router-dom";
 import React, { useEffect, useState, useContext } from "react";
 import axios from "axios";
-import { useAuth } from '../Utilities/AuthContext';
+import { useAuth } from '../Context/AuthContext';
 import Cart from '../Components/Cart.jsx';
-import { CartContext } from '../context/cart.jsx'
+import { CartContext } from '../Context/cart.jsx'
 import Login from "../Pages/Login";
 
 function NavBar() {
     const [showModal, setshowModal] = useState(false);
     const { cartItems, addToCart } = useContext(CartContext);
-    
     const { user, logout } = useAuth();
     const navigate = useNavigate();
 
@@ -28,8 +27,7 @@ function NavBar() {
     };
 
     return (
-        <div>
-           
+        <div>       
             <nav className="navbar navbar-expand-lg bg-body-tertiary">
                 <div className="container-fluid">
                     <NavLink className="navbar-brand" to="/">OnlineShop</NavLink>
@@ -38,9 +36,7 @@ function NavBar() {
                     </button>
                     <div className="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-                            <li className="nav-item">
-                                <NavLink className="nav-link" to="/">Home</NavLink>
-                            </li>
+
                             <li className="nav-item">
                                 <NavLink className="nav-link" to="/allproducts">All Products</NavLink>
                             </li>
